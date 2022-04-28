@@ -18,9 +18,9 @@ public class Main {
         userDao.saveUser("Chili", "Villi", (byte) 42);
         userDao.saveUser("Shaltay", "Baltay", (byte) 43);
 
-     //  userDao.removeUserById(1);
-     //   userDao.getAllUsers();
-     //   userDao.cleanUsersTable();
-     //   userDao.dropUsersTable();
+       userDao.removeUserById(1);
+        userDao.getAllUsers();
+        userDao.cleanUsersTable();
+       userDao.dropUsersTable();
     }
 }
