@@ -18,7 +18,6 @@ public class UserServiceTest {
     public void dropUsersTable() {
         try {
             userService.dropUsersTable();
-            userService.dropUsersTable();
         } catch (Exception e) {
             Assert.fail("При тестировании удаления таблицы произошло исключение\n" + e);
         }
@@ -27,7 +26,6 @@ public class UserServiceTest {
     @Test
     public void createUsersTable() {
         try {
-            userService.dropUsersTable();
             userService.createUsersTable();
         } catch (Exception e) {
             Assert.fail("При тестировании создания таблицы пользователей произошло исключение\n" + e.getMessage());
@@ -37,8 +35,6 @@ public class UserServiceTest {
     @Test
     public void saveUser() {
         try {
-            userService.dropUsersTable();
-            userService.createUsersTable();
             userService.saveUser(testName, testLastName, testAge);
 
             User user = userService.getAllUsers().get(0);
@@ -58,9 +54,9 @@ public class UserServiceTest {
     @Test
     public void removeUserById() {
         try {
-            userService.dropUsersTable();
-            userService.createUsersTable();
-            userService.saveUser(testName, testLastName, testAge);
+            //userService.dropUsersTable();
+            //userService.createUsersTable();
+            //userService.saveUser(testName, testLastName, testAge);
             userService.removeUserById(1L);
         } catch (Exception e) {
             Assert.fail("При тестировании удаления пользователя по id произошло исключение\n" + e);

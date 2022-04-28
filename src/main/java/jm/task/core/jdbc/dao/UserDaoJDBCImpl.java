@@ -1,28 +1,55 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.util.Util;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    public UserDaoJDBCImpl() {
+    private final Connection connection = Util.getMySQLConnection();
+    public UserDaoJDBCImpl() throws SQLException, ClassNotFoundException {
 
     }
 
     public void createUsersTable() {
-
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS users " +
+                    "(id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), lastname VARCHAR(255), age INT)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void dropUsersTable() {
-
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("DROP TABLE IF EXISTS users");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveUser(String name, String lastName, byte age) {
-
+        try (PreparedStatement prepared = connection.prepareStatement("INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)")) {
+            prepared.setString(1, name);
+            prepared.setString(2, lastName);
+            prepared.setByte(3, age);
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void removeUserById(long id) {
-
+        try (PreparedStatement prepared = connection.prepareStatement("DELETE FROM users WHERE id = ?")) {
+            prepared.setLong(1, id);
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<User> getAllUsers() {
@@ -30,6 +57,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("TRUNCATE TABLE users");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
