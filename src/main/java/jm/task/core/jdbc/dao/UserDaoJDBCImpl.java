@@ -8,8 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private final Connection connection = Util.getMySQLConnection();
-    public UserDaoJDBCImpl() throws SQLException, ClassNotFoundException {
+    private final Connection connection;
+
+    {
+        try {
+            connection = Util.getMySQLConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public UserDaoJDBCImpl()  {
 
     }
 

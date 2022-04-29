@@ -19,7 +19,7 @@ public class UserServiceTest {
         try {
             userService.dropUsersTable();
         } catch (Exception e) {
-            Assert.fail("РџСЂРё С‚РµСЃС‚РёСЂРѕРІР°РЅРёРё СѓРґР°Р»РµРЅРёСЏ С‚Р°Р±Р»РёС†С‹ РїСЂРѕРёР·РѕС€Р»Рѕ РёСЃРєР»СЋС‡РµРЅРёРµ\n" + e);
+            Assert.fail("При тестировании удаления таблицы произошло исключение\n" + e);
         }
     }
 
@@ -28,7 +28,7 @@ public class UserServiceTest {
         try {
             userService.createUsersTable();
         } catch (Exception e) {
-            Assert.fail("РџСЂРё С‚РµСЃС‚РёСЂРѕРІР°РЅРёРё СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РїСЂРѕРёР·РѕС€Р»Рѕ РёСЃРєР»СЋС‡РµРЅРёРµ\n" + e.getMessage());
+            Assert.fail("При тестировании создания таблицы пользователей произошло исключение\n" + e.getMessage());
         }
     }
 
@@ -43,23 +43,23 @@ public class UserServiceTest {
                     || !testLastName.equals(user.getLastName())
                     || testAge != user.getAge()
             ) {
-                Assert.fail("User Р±С‹Р» РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ РґРѕР±Р°РІР»РµРЅ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…");
+                Assert.fail("User был некорректно добавлен в базу данных");
             }
 
         } catch (Exception e) {
-            Assert.fail("Р’Рѕ РІСЂРµРјСЏ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїСЂРѕРёР·РѕС€Р»Рѕ РёСЃРєР»СЋС‡РµРЅРёРµ\n" + e);
+            Assert.fail("Во время тестирования сохранения пользователя произошло исключение\n" + e);
         }
     }
 
     @Test
     public void removeUserById() {
         try {
-            //userService.dropUsersTable();
-            //userService.createUsersTable();
-            //userService.saveUser(testName, testLastName, testAge);
+            userService.dropUsersTable();
+            userService.createUsersTable();
+            userService.saveUser(testName, testLastName, testAge);
             userService.removeUserById(1L);
         } catch (Exception e) {
-            Assert.fail("РџСЂРё С‚РµСЃС‚РёСЂРѕРІР°РЅРёРё СѓРґР°Р»РµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїРѕ id РїСЂРѕРёР·РѕС€Р»Рѕ РёСЃРєР»СЋС‡РµРЅРёРµ\n" + e);
+            Assert.fail("При тестировании удаления пользователя по id произошло исключение\n" + e);
         }
     }
 
@@ -72,10 +72,10 @@ public class UserServiceTest {
             List<User> userList = userService.getAllUsers();
 
             if (userList.size() != 1) {
-                Assert.fail("РџСЂРѕРІРµСЂСЊС‚Рµ РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚СЊ СЂР°Р±РѕС‚С‹ РјРµС‚РѕРґР° СЃРѕС…СЂР°РЅРµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ/СѓРґР°Р»РµРЅРёСЏ РёР»Рё СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹");
+                Assert.fail("Проверьте корректность работы метода сохранения пользователя/удаления или создания таблицы");
             }
         } catch (Exception e) {
-            Assert.fail("РџСЂРё РїРѕРїС‹С‚РєРµ РґРѕСЃС‚Р°С‚СЊ РІСЃРµС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С… РїСЂРѕРёР·РѕС€Р»Рѕ РёСЃРєР»СЋС‡РµРЅРёРµ\n" + e);
+            Assert.fail("При попытке достать всех пользователей из базы данных произошло исключение\n" + e);
         }
     }
 
@@ -88,10 +88,10 @@ public class UserServiceTest {
             userService.cleanUsersTable();
 
             if (userService.getAllUsers().size() != 0) {
-                Assert.fail("РњРµС‚РѕРґ РѕС‡РёС‰РµРЅРёСЏ С‚Р°Р±Р»РёС†С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ СЂРµР°Р»РёР·РѕРІР°РЅ РЅРµ РєРѕСЂСЂРµРєС‚РЅРѕ");
+                Assert.fail("Метод очищения таблицы пользователей реализован не корректно");
             }
         } catch (Exception e) {
-            Assert.fail("РџСЂРё С‚РµСЃС‚РёСЂРѕРІР°РЅРёРё РѕС‡РёСЃС‚РєРё С‚Р°Р±Р»РёС†С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РїСЂРѕРёР·РѕС€Р»Рѕ РёСЃРєР»СЋС‡РµРЅРёРµ\n" + e);
+            Assert.fail("При тестировании очистки таблицы пользователей произошло исключение\n" + e);
         }
     }
 

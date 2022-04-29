@@ -4,13 +4,17 @@ import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    UserDao userDao;
+    private UserDao userDao;
 
-    {
+    public UserServiceImpl() {
+        this.userDao = new UserDaoJDBCImpl();
+    }
+
+
+    /*    {
         try {
             userDao = new UserDaoJDBCImpl();
         } catch (SQLException e) {
@@ -18,7 +22,7 @@ public class UserServiceImpl implements UserService {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
+    }  */
 
 
     public void createUsersTable() {
