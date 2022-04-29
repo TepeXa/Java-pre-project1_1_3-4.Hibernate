@@ -26,6 +26,7 @@ public class UserServiceTest {
     @Test
     public void createUsersTable() {
         try {
+            userService.dropUsersTable();
             userService.createUsersTable();
         } catch (Exception e) {
             Assert.fail("ѕри тестировании создани€ таблицы пользователей произошло исключение\n" + e.getMessage());
@@ -35,6 +36,8 @@ public class UserServiceTest {
     @Test
     public void saveUser() {
         try {
+            userService.dropUsersTable();
+            userService.createUsersTable();
             userService.saveUser(testName, testLastName, testAge);
 
             User user = userService.getAllUsers().get(0);
