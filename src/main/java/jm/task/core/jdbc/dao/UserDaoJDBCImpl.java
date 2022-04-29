@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private final Connection connection;
+
+    /*private final Connection connection;
 
     {
         try {
@@ -18,7 +19,8 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
+    Connection connection = Util.getMySQLConnection();
 
     public UserDaoJDBCImpl()  {
 
