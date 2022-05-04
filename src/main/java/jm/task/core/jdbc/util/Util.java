@@ -1,12 +1,19 @@
 package jm.task.core.jdbc.util;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
 
-  /*  public static Connection getMySQLConnection() throws SQLException,
+  /*  ==== original JDBC =====
+      public static Connection getMySQLConnection() throws SQLException,
       ClassNotFoundException {
       Class.forName("com.mysql.cj.jdbc.Driver");
       String hostName = "localhost";
@@ -17,9 +24,12 @@ public class Util {
       String connectionURL = "jdbc:mysql://localhost:3306/new_schema_test";
 
       Connection connection = DriverManager.getConnection(connectionURL, userName, password);
-      return connection; */
-     private static Connection connection = null;
- // Class.forName("com.mysql.cj.jdbc.Driver");
+      return connection;
+      ======= end original =========
+      */
+   /*
+    ==========  test ==========
+    private static Connection connection = null;
     private static final String hostName = "localhost";
     private static final  String dbName = "new_schema_test";
     private static final String userName = "Yanewuser";
@@ -36,4 +46,18 @@ public class Util {
         }
         return connection;
     }
+
+    ===== end test =======*/
+  private static SessionFactory sessionFactory = null;
+  public static SessionFactory getConnection() {
+
+      try {
+          sessionFactory = new Configuration()
+
+                  .buildSessionFactory();
+      } catch (HibernateException e) {
+          e.printStackTrace();
+      }
+      return sessionFactory;
+  }
 }
