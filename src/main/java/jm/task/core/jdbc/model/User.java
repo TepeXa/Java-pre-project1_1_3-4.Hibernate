@@ -62,11 +62,6 @@ public class User {
         this.age = age;
     }
 
- /*   @Override
-    public String toString() {
-        return null;//String.format("Пользователь => id = '%s', name = '%s', lastName = '%s', age = '%d' <=", getId(), getName(), getLastName(), getAge());
-    }*/
-
     @Override
     public String toString() {
         return "=> Пользователь " +

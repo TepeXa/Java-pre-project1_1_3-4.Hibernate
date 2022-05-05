@@ -122,7 +122,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try {
             session.createNativeQuery("TRUNCATE TABLE users;").executeUpdate();
             transaction.commit();
-            System.out.println("Таблица очищена");
+            System.out.println("Таблица users очищена");
         } catch (HibernateException e) {
             e.printStackTrace();
             if (transaction != null) {
