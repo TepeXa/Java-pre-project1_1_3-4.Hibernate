@@ -69,11 +69,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                '}';
+        return "=> Пользователь " +
+                "c id =" + id +
+                ", c именем ='" + name + '\'' +
+                ", с фамилией ='" + lastName + '\'' +
+                ", и возрастом =" + age +
+                " <=";
     }
 }
