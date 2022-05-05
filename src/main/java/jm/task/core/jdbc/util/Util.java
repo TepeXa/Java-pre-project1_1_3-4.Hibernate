@@ -1,5 +1,6 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -53,7 +54,7 @@ public class Util {
 
       try {
           sessionFactory = new Configuration()
-
+                  .addAnnotatedClass(User.class)
                   .buildSessionFactory();
       } catch (HibernateException e) {
           e.printStackTrace();
